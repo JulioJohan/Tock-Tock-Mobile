@@ -13,7 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => DiscoverProvider())      
+        // .. Operador de casacada, cargara las videos cuando se llame esta clase        
+        ChangeNotifierProvider(
+          // Lazy es que se crea muy rapidamente
+          lazy: false,
+          create: (_) => DiscoverProvider()..loadNextPage())      
       ],
       child: MaterialApp(
           title: 'TokTok',
