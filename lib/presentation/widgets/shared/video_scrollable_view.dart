@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toktok/domain/entities/post_videos.dart';
 import 'package:toktok/presentation/widgets/shared/video_buttons.dart';
+import 'package:toktok/presentation/widgets/video/fullsreen_player.dart';
 
 class VideoScrollableView extends StatelessWidget {
   final List<VideoPost> videos;
@@ -25,10 +26,9 @@ class VideoScrollableView extends StatelessWidget {
         // El widget Stack ayuda a tener el video de tras y los botones hacia delante
         return Stack(
           children: [
-            SizedBox.expand(
-              
+            SizedBox.expand(              
               // El area donde se reproducira el video
-              child: Container(color: Colors.red),
+              child: FullScreenPlayer(videoUrl: videosPost.videoUrl, caption: videosPost.caption),
             ),
             // FullScreenVideoPlayer()
             

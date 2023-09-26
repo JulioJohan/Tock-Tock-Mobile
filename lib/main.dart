@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           create: (_) => DiscoverProvider()..loadNextPage())      
       ],
       child: MaterialApp(
-          title: 'TokTok',
+          title: 'TockTock',
           debugShowCheckedModeBanner: false,
           theme: AppTheme().getTheme(),
           home: const DiscoverScreen()),
