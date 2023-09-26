@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toktok/config/theme/app_theme.dart';
+import 'package:toktok/infrastructure/datasources/local_video_datasource_imp.dart';
+import 'package:toktok/infrastructure/repositories/video_post_repository_imp.dart';
 import 'package:toktok/presentation/providers/discover_provider.dart';
 import 'package:toktok/presentation/screens/discover/discover_screen.dart';
 
@@ -11,13 +13,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // utilizando arquitectura limpia
+    final videoPostRepository = VideoPostsRepositoryImpl(videosDataSource: LocalVideoDataSourceImpl());
+
     return MultiProvider(
       providers: [
-        // .. Operador de casacada, cargara las videos cuando se llame esta clase        
+        // .. Operador de casacada, cargara las videos cuando se llame esta clase
         ChangeNotifierProvider(
-          // Lazy es que se crea muy rapidamente
-          lazy: false,
-          create: (_) => DiscoverProvider()..loadNextPage())      
+            // Lazy es que se crea muy rapidamente
+            lazy: false,
+            create: (_) => DiscoverProvider(videosRepository: videoPostRepository)..loadNextPage())
       ],
       child: MaterialApp(
           title: 'TockTock',
