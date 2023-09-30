@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toktok/config/theme/app_theme.dart';
 import 'package:toktok/infrastructure/datasources/local_video_datasource_imp.dart';
+import 'package:toktok/infrastructure/datasources/post_datasource_imp.dart';
+import 'package:toktok/infrastructure/repositories/post_repository_imp.dart';
 import 'package:toktok/infrastructure/repositories/video_post_repository_imp.dart';
 import 'package:toktok/presentation/providers/discover_provider.dart';
 import 'package:toktok/presentation/screens/discover/discover_screen.dart';
@@ -14,7 +16,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // utilizando arquitectura limpia
-    final videoPostRepository = VideoPostsRepositoryImpl(videosDataSource: LocalVideoDataSourceImpl());
+    final postDataSourceImpl =
+        PostsRepositoryImpl(postDataSource: PostDataSourceImpl());
 
     return MultiProvider(
       providers: [
@@ -22,7 +25,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             // Lazy es que se crea muy rapidamente
             lazy: false,
-            create: (_) => DiscoverProvider(videosRepository: videoPostRepository)..loadNextPage())
+            create: (_) => DiscoverProvider(postRepository: postDataSourceImpl)
+              ..loadNextPage())
       ],
       child: MaterialApp(
           title: 'TockTock',

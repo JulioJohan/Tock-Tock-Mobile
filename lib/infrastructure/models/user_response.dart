@@ -6,11 +6,11 @@ class User {
     bool confirmed;
     String emailVerified;
     String multiFactorAuthentication;
-    String fatherLastName;
-    String motherLastName;
-    int age;
-    DateTime dateBirth;
-    String avatar;
+    String? fatherLastName;
+    String? motherLastName;
+    int? age;
+    DateTime? dateBirth;
+    String? avatar;
 
     User({
         required this.idUser,
@@ -23,8 +23,8 @@ class User {
         required this.fatherLastName,
         required this.motherLastName,
         required this.age,
-        required this.dateBirth,
-        required this.avatar,
+        this.dateBirth,
+        this.avatar = '',
     });
 
     factory User.fromJson(Map<String, dynamic> json) => User(
@@ -38,7 +38,7 @@ class User {
         fatherLastName: json["fatherLastName"],
         motherLastName: json["motherLastName"],
         age: json["age"],
-        dateBirth: json["dateBirth"],
+        dateBirth: json["dateBirth"] == null ? null : DateTime.parse(json["dateBirth"]),
         avatar: json["avatar"],
     );
 

@@ -1,25 +1,28 @@
-class Response<T> {
+class ResponseData<T> {
     String status;
     String message;
-    List<T>? list;
+    List<dynamic>? list;
     int count;
     T? data;
 
-    Response({
+    ResponseData({
         required this.status,
         required this.message,
-        required this.list,
+        this.list,
         required this.count,
-        required this.data,
+        this.data,
     });
 
-    factory Response.fromJson(Map<String, dynamic> json) => Response(
-        status: json["status"],
-        message: json["message"],
-        list: List<T>.from(json["list"]),
-        count: json["count"],
-        data: json["data"],
+    factory ResponseData.fromJson(Map<String, dynamic> json, Function fromJson) {
+    return ResponseData(
+    status: json["status"],
+    message: json["message"],
+    list: List.from(json["list"]).map((item) => fromJson(item)).toList(),
+    count: json["count"],
+    data: json["data"] != null ? fromJson(json["data"]) : null,
     );
+  }
+
 
     Map<String, dynamic> toJson() => {
         "status": status,

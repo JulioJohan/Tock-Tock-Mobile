@@ -4,9 +4,9 @@ import 'package:video_player/video_player.dart';
 
 class FullScreenPlayer extends StatefulWidget {
   final String videoUrl;
-  final String caption;
+  final String description;
   const FullScreenPlayer(
-      {super.key, required this.videoUrl, required this.caption});
+      {super.key, required this.videoUrl, required this.description});
 
   @override
   State<FullScreenPlayer> createState() => _FullScreenPlayerState();
@@ -23,10 +23,15 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
     //
     // VideoPlayerController.networkUrl(url)
     // Cargar nuestro video
-    controller = VideoPlayerController.asset(widget.videoUrl)
+    print(widget.videoUrl);
+    controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
       ..setVolume(0)
       // Siempre quiero que los videos se este reproduciendo
       ..setLooping(true)
+      ..initialize().then((value) => {
+      // Asegúrate de llamar a setState para que se reconstruya la interfaz y se muestre el video.
+      setState(() {})
+      })  
       ..play();
   }
 
@@ -80,7 +85,7 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
                 Positioned(
                   bottom: 50,
                   left: 20,
-                  child: _VideoCaption(caption: widget.caption),
+                  child: _VideoCaption(caption: widget.description),
                   // child: Text('$c')
                 )
               ],
