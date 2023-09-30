@@ -1,9 +1,9 @@
-class Response {
+class Response<T> {
     String status;
     String message;
-    List<dynamic> list;
+    List<T>? list;
     int count;
-    dynamic data;
+    T? data;
 
     Response({
         required this.status,
@@ -16,7 +16,7 @@ class Response {
     factory Response.fromJson(Map<String, dynamic> json) => Response(
         status: json["status"],
         message: json["message"],
-        list: List<dynamic>.from(json["list"]),
+        list: List<T>.from(json["list"]),
         count: json["count"],
         data: json["data"],
     );
@@ -24,8 +24,21 @@ class Response {
     Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "list": List<dynamic>.from(list),
+        "list": List<T>.from(list!),
         "count": count,
         "data": data,
     };
+
+    void setList(List<T>? tmp) {
+      if (tmp != null) {
+        this.list = List<T>.from(tmp);
+      }
+    }
+
+    List<T>? getList() {
+      if (this.list != null) {
+        return List<T>.from(this.list!);
+      }
+      return null;
+    }
 }
