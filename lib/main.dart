@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toktok/config/theme/app_theme.dart';
-import 'package:toktok/infrastructure/datasources/local_video_datasource_imp.dart';
 import 'package:toktok/infrastructure/datasources/post_datasource_imp.dart';
 import 'package:toktok/infrastructure/repositories/post_repository_imp.dart';
-import 'package:toktok/infrastructure/repositories/video_post_repository_imp.dart';
 import 'package:toktok/presentation/providers/discover_provider.dart';
 import 'package:toktok/presentation/screens/discover/discover_screen.dart';
 
