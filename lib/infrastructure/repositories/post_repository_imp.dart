@@ -5,11 +5,11 @@ import 'package:toktok/infrastructure/models/post_response.dart';
 class PostsRepositoryImpl implements PostRepository {
   final PostDataSource postDataSource;
 
-  PostsRepositoryImpl({required this.postDataSource});
+  PostsRepositoryImpl(this.postDataSource);
 
   @override
-  Future<List<Post>> getAllPost() {
-    return postDataSource.getAllPost();
+  Future<List<Post>> getAllPost(int page,int size) {
+    return postDataSource.getAllPost(page,size);
   }
 
   @override
