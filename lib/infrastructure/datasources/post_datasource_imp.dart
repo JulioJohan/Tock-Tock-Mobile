@@ -12,12 +12,13 @@ class PostDataSourceImpl implements PostDataSource {
   @override
   Future<List<Post>> getAllPost(int page, int size) async {
     String url = '${enviroment.getUrl()}/post/findAllPost/$page/$size ';
-    // print(url);
+    print(url);
     final response = await Dio().get(url);
     // print(response.data['list']);
-    responsePost =  ResponseData<Post>.fromJson(
+    responsePost = ResponseData<Post>.fromJson(
         response.data, (json) => Post.fromJson(json));
     final List<Post> listPost = responsePost.list!.cast<Post>();
+    print(listPost);
     return listPost;
   }
 

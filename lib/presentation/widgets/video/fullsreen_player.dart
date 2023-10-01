@@ -5,8 +5,12 @@ import 'package:video_player/video_player.dart';
 class FullScreenPlayer extends StatefulWidget {
   final String videoUrl;
   final String description;
+  final VoidCallback? loadNextPage;
   const FullScreenPlayer(
-      {super.key, required this.videoUrl, required this.description});
+      {super.key,
+      required this.videoUrl,
+      required this.description,
+      this.loadNextPage});
 
   @override
   State<FullScreenPlayer> createState() => _FullScreenPlayerState();
@@ -15,28 +19,39 @@ class FullScreenPlayer extends StatefulWidget {
 class _FullScreenPlayerState extends State<FullScreenPlayer> {
   late VideoPlayerController controller;
 
+  final scrollController = ScrollController();
+
   @override
   void initState() {
     // Inicar el state
     super.initState();
+
+    scrollController.addListener(() {
+      if (widget.loadNextPage == null) return;
+
+      if ((scrollController.position.pixels + 200) >=
+          scrollController.position.maxScrollExtent) {
+        widget.loadNextPage!();
+      }
+    });
     //
     //
     // VideoPlayerController.networkUrl(url)
     // Cargar nuestro video
     print(widget.videoUrl);
-    controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
+    controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))    
       ..setVolume(10)
       // Siempre quiero que los videos se este reproduciendo
       ..setLooping(true)
-      ..initialize().then((value) => {
-            // Asegúrate de llamar a setState para que se reconstruya la interfaz y se muestre el video.
-              setState(() {})               
-          })
+      // ..initialize().then((value) => {
+           
+      //     })
       ..play();
   }
 
   @override
   void dispose() {
+    scrollController.dispose();
     // Elimina los videos que no estoy visualizando
     controller.dispose();
     super.dispose();
@@ -75,7 +90,11 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
             // Video
             child: Stack(
               children: [
-                VideoPlayer(controller),
+                // SizedBox(
+                  // width: controller.value.size?.width ?? 0,
+                  // height: controller.value.size?.height ?? 0,
+                  // child:
+                  VideoPlayer(controller),
                 // Gradiente
                 VideoBackgroud(
                   stops: const [0.8, 1.0],

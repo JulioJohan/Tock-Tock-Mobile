@@ -5,8 +5,9 @@ import 'package:toktok/presentation/widgets/video/fullsreen_player.dart';
 
 class VideoScrollableView extends StatelessWidget {
   final List<Post> videos;
+  final VoidCallback? loadNextPage;
 
-  const VideoScrollableView({super.key, required this.videos});
+  const VideoScrollableView({super.key, required this.videos,this.loadNextPage});
 
   @override
   Widget build(BuildContext context) {
