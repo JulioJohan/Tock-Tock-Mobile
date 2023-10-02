@@ -2,7 +2,7 @@
 class Enviroment {
   final String url;
 
-  Enviroment({this.url = 'http://192.168.0.9:8081'});
+  Enviroment({this.url = 'http://192.168.6.19:8081'});
 
   String getUrl() {
     return url;

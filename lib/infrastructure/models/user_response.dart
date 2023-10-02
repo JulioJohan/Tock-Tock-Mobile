@@ -10,7 +10,7 @@ class User {
     String? motherLastName;
     int? age;
     DateTime? dateBirth;
-    String? avatar;
+    String avatar;
 
     User({
         required this.idUser,

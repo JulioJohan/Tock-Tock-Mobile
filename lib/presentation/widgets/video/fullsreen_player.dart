@@ -40,7 +40,7 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
     // Cargar nuestro video
     print(widget.videoUrl);
     controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))    
-      ..setVolume(10)
+      ..setVolume(20)
       // Siempre quiero que los videos se este reproduciendo
       ..setLooping(true)
       // ..initialize().then((value) => {

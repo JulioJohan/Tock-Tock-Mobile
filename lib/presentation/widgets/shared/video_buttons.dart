@@ -2,34 +2,45 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:toktok/config/helpers/human_formats.dart';
 import 'package:toktok/infrastructure/models/post_response.dart';
+import 'package:toktok/infrastructure/models/user_response.dart';
 
 class VideoButtons extends StatelessWidget {
   // Recibicmos el video
   final Post videoPost;
+  // final User user;
   const VideoButtons({super.key, required this.videoPost});
 
   @override
   Widget build(BuildContext context) {
+    print(videoPost.numLike);
     return Column(
       children: [
+
         // Button
+        CircleAvatar(
+          radius: 25,
+          backgroundImage: NetworkImage(videoPost.user.avatar)
+        ),
+        const SizedBox(height: 15),
         _CustomIconButton(
             value: videoPost.numLike,
             iconColor: Colors.red,
             iconData: Icons.favorite),
         // Separación
-        // const SizedBox(height: 20),
-        // _CustomIconButton(value: videoPost., iconData: Icons.mode_comment_outlined),
-        const SizedBox(height: 20),
+        const SizedBox(height: 15),
         _CustomIconButton(
-            value: videoPost.numLike, iconData: Icons.remove_red_eye_outlined),
-        const SizedBox(height: 20),
+            value: videoPost.numLike, iconData: Icons.mode_comment_outlined),
+        const SizedBox(height: 15),
+        // _CustomIconButton(
+        //     value: videoPost.numLike, iconData: Icons.remove_red_eye_outlined),
+        // const SizedBox(height: 15),
         // SpinPerfect ayuda a girar el spinner
         SpinPerfect(
-          // Duración que de la vulta
-          duration: const Duration(seconds: 5),
-          infinite: true,
-          child: const _CustomIconButton(value: 0, iconData: Icons.play_circle_outline))
+            // Duración que de la vulta
+            duration: const Duration(seconds: 5),
+            infinite: true,
+            child: const _CustomIconButton(
+                value: 0, iconData: Icons.play_circle_outline))
       ],
     );
   }

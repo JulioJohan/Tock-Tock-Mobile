@@ -27,7 +27,8 @@ class VideoScrollableView extends StatelessWidget {
         // El widget Stack ayuda a tener el video de tras y los botones hacia delante
         return Stack(
           children: [
-            SizedBox.expand(              
+            SizedBox.expand( 
+                           
               // El area donde se reproducira el video
               child: FullScreenPlayer(videoUrl: videosPost.multimedia, description: videosPost.description),
             ),

@@ -49,7 +49,7 @@ class _DiscoverScreenViewState extends ConsumerState<_DiscoverScreen> {
   Widget build(BuildContext context) {
     final initialLoading = ref.watch(initialLoadingProvider);
     final postPage = ref.watch(nowPlayingPostsProviderPage);
-    // print(postPage);
+    print(postPage);
     if (initialLoading) return const FullScreenLoader();
 
     return Scaffold(
