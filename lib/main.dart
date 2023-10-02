@@ -6,6 +6,7 @@ import 'package:toktok/config/router/app_router.dart';
 import 'package:toktok/config/theme/app_theme.dart';
 import 'package:toktok/presentation/screens/discover/discover_screen.dart';
 import 'package:toktok/presentation/widgets/login/login.dart';
+import 'package:toktok/presentation/widgets/registro/registro.dart';
 // import 'package:toktok/infrastructure/datasources/post_datasource_imp.dart';
 // import 'package:toktok/infrastructure/repositories/post_repository_imp.dart';
 // import 'package:toktok/presentation/providers/posts/discover_provider.dart';
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => LoginPage(),
+        '/registro': (context) => RegistroPage(),
         '/home': (context) => DiscoverScreen(),
       },
     );

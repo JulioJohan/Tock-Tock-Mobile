@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class LoginPage extends StatefulWidget {
+
+class RegistroPage extends StatefulWidget {
   static const String name = '/';
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegistroPage createState() => _RegistroPage();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegistroPage extends State<RegistroPage> {
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  Future<void> _handleEmailSignIn() async {
+  Future<void> _createUser() async {
     try {
       final String email = _emailController.text.trim();
       final String password = _passwordController.text.trim();
@@ -27,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
         return;
       }
 
-      final UserCredential authResult = await _auth.signInWithEmailAndPassword(
+      final UserCredential authResult = await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -45,36 +47,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> _handleGoogleSignIn() async {
-    try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount!.authentication;
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-      final UserCredential authResult =
-          await _auth.signInWithCredential(credential);
-      final User? user = authResult.user;
-
-      if (user != null) {
-        // Iniciar sesión con éxito, redirigir a la página principal.
-        Navigator.of(context).pushReplacementNamed('/home');
-      }
-    } catch (error) {
-      print(error);
-      _showAlert(
-          'Error de inicio de sesión', 'Error al iniciar sesión con Google.');
-    }
-  }
-
-  Future<void> _registrarse() async {
-    Navigator.of(context).pushReplacementNamed('/registro');
-  }
-
-  void _showAlert(String title, String message) {
+    void _showAlert(String title, String message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -83,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -94,52 +67,41 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Registro'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Correo',
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Contraseña',
                 ),
               ),
             ),
             ElevatedButton(
               onPressed: () {
-                _handleEmailSignIn();
+                _createUser();
               },
-              child: Text('Ingresar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _handleGoogleSignIn();
-              },
-              child: Text('Ingresar con Google'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                _registrarse();
-              },
-              child: Text('Registrarse'),
+              child: const Text('Registrarse'),
             ),
           ],
         ),
