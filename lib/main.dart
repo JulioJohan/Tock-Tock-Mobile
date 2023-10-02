@@ -15,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding();
 
   await Firebase.initializeApp(
-    options: FirebaseOptions(
+     options: const FirebaseOptions(
         apiKey: "AIzaSyDTh6VngDRxis071fNhrXv9_uufeSmikf0",
         authDomain: "tock-tock-f41b9.firebaseapp.com",
         projectId: "tock-tock-f41b9",
@@ -53,15 +53,15 @@ class MyApp extends StatelessWidget {
       // home: const DiscoverScreen()),
     //);
 
-    return MaterialApp(
+    return MaterialApp.router(      
       title: 'tock-tock',
-      initialRoute: '/',
+      routerConfig:appRouter,
       theme: AppTheme().getTheme(),
       debugShowCheckedModeBanner: false,
-      routes: {
-        '/': (context) => LoginPage(),
-        '/home': (context) => DiscoverScreen(),
-      },
+      // routes: {
+      //   '/': (context) => LoginPage(),
+      //   '/home': (context) =>  DiscoverScreen(),
+      // },
     );
   
   }

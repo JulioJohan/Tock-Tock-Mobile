@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
-  static const String name = '/';
+  static const String name = 'login';
 
   @override
   _LoginPageState createState() => _LoginPageState();
