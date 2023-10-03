@@ -5,27 +5,35 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:toktok/config/router/app_router.dart';
 import 'package:toktok/config/theme/app_theme.dart';
 import 'package:toktok/presentation/screens/discover/discover_screen.dart';
-import 'package:toktok/presentation/widgets/login/login.dart';
-import 'package:toktok/presentation/widgets/registro/registro.dart';
+import 'package:toktok/presentation/widgets/screens/login/login.dart';
+import 'package:toktok/presentation/widgets/screens/registro/registro.dart';
 // import 'package:toktok/infrastructure/datasources/post_datasource_imp.dart';
 // import 'package:toktok/infrastructure/repositories/post_repository_imp.dart';
 // import 'package:toktok/presentation/providers/posts/discover_provider.dart';
 // import 'package:toktok/presentation/screens/discover/discover_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding();
+  WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-     options: const FirebaseOptions(
+  try {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
         apiKey: "AIzaSyDTh6VngDRxis071fNhrXv9_uufeSmikf0",
         authDomain: "tock-tock-f41b9.firebaseapp.com",
         projectId: "tock-tock-f41b9",
         storageBucket: "tock-tock-f41b9.appspot.com",
         messagingSenderId: "882987567219",
         appId: "1:882987567219:web:b3ac20bfb0fbe996ce4206"),
-  );
+    );
+  } on FirebaseException catch (e) {
+    if (e.code != 'duplicate-app') {
+      rethrow;
+    }
+  }
+
   runApp(const ProviderScope(child: MyApp()));
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

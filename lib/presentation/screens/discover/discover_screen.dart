@@ -10,7 +10,7 @@ import 'package:toktok/presentation/widgets/shared/video_scrollable_view.dart';
 
 class DiscoverScreen extends StatelessWidget {
   const DiscoverScreen({super.key});
-  static const name = 'Inicio';
+  static const name = 'home';
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DiscoverScreen extends StatelessWidget {
       //       ))
       //     : VideoScrollableView(videos: discoverProvider.videos),
       body: _DiscoverScreen(),
-      bottomNavigationBar: CustomBottomNavigation(),
+      // bottomNavigationBar: CustomBottomNavigation(currentIndex: null,),
     );
   }
 }
