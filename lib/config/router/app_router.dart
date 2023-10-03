@@ -1,9 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:toktok/presentation/widgets/screens/home/home_screen.dart';
+import 'package:toktok/presentation/widgets/screens/login/login.dart';
+import 'package:toktok/presentation/widgets/screens/registro/registro.dart';
 
 
 final appRouter = GoRouter(
-  initialLocation: '/home/0',
+  initialLocation: '/login',
   routes: [
     
     GoRoute(
@@ -25,6 +27,17 @@ final appRouter = GoRouter(
       //     },
       //   ),
       // ]
+    ),
+    GoRoute(path: '/login',
+    name: LoginPage.name,
+    builder: (context, state) => LoginPage(),
+    
+    ),
+
+     GoRoute(path: '/registro',
+    name: RegistroPage.name,
+    builder: (context, state) => RegistroPage(),
+    
     ),
 
 

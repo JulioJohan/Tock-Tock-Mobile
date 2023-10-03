@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 
 class RegistroPage extends StatefulWidget {
   static const String name = '/';
@@ -11,7 +11,6 @@ class RegistroPage extends StatefulWidget {
 }
 
 class _RegistroPage extends State<RegistroPage> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
@@ -29,7 +28,8 @@ class _RegistroPage extends State<RegistroPage> {
         return;
       }
 
-      final UserCredential authResult = await _auth.createUserWithEmailAndPassword(
+      final UserCredential authResult =
+          await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -38,7 +38,7 @@ class _RegistroPage extends State<RegistroPage> {
 
       if (user != null) {
         // Iniciar sesión con éxito, redirigir a la página principal.
-        Navigator.of(context).pushReplacementNamed('/home');
+        context.go('/home/0');
       }
     } catch (error) {
       print(error);
@@ -47,7 +47,7 @@ class _RegistroPage extends State<RegistroPage> {
     }
   }
 
-    void _showAlert(String title, String message) {
+  void _showAlert(String title, String message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -66,7 +66,6 @@ class _RegistroPage extends State<RegistroPage> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

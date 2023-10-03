@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> _registrarse() async {
-    Navigator.of(context).pushReplacementNamed('/registro');
+    context.go('/registro');
   }
 
   void _showAlert(String title, String message) {
