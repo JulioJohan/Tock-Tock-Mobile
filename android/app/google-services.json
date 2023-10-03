@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:882987567219:android:880c45925feed588ce4206",
+        "mobilesdk_app_id": "1:882987567219:android:cf7c64f4b4eafa72ce4206",
         "android_client_info": {
           "package_name": "com.example.toktok"
         }
@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCsslHLAojRERvhSclfCk2q3NKyapkQv0s"
+          "current_key": "AIzaSyBOZe4GfehsSotNmhI4K4qapIstizksLAc"
         }
       ],
       "services": {
