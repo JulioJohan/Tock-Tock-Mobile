@@ -8,13 +8,23 @@ class PostsRepositoryImpl implements PostRepository {
   PostsRepositoryImpl(this.postDataSource);
 
   @override
-  Future<List<Post>> getAllPost(int page,int size) {
-    return postDataSource.getAllPost(page,size);
+  Future<List<Post>> getAllPost(int page, int size) {
+    return postDataSource.getAllPost(page, size);
   }
 
   @override
   Future<Post> savePost() {
     // TODO: implement savePost
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Post> sumLike(int idPost) {
+    return postDataSource.sumLike(idPost);
+  }
+
+  @override
+  Future<Post> subtractLike(int idPost) {
+    return postDataSource.subtractLike(idPost);
   }
 }

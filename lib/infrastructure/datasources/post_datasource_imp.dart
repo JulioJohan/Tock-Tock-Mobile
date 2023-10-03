@@ -27,4 +27,28 @@ class PostDataSourceImpl implements PostDataSource {
     // TODO: implement savePost
     throw UnimplementedError();
   }
+
+  @override
+  Future<Post> sumLike(int idPost) async {
+    ResponseData<Post> responsePostSum =
+        ResponseData(status: "", message: "", list: [], count: 0);
+    String url = '${enviroment.getUrl()}/post/sumLike/$idPost';
+    final response = await Dio().put(url);
+    responsePostSum = ResponseData<Post>.fromJson(
+        response.data, (json) => Post.fromJson(json));
+    final Post post = responsePostSum.data!;
+    return post;
+  }
+
+  @override
+  Future<Post> subtractLike(int idPost) async {
+    ResponseData<Post> responsePostSum =
+        ResponseData(status: "", message: "", list: [], count: 0);
+    String url = '${enviroment.getUrl()}/post/subtractLike/$idPost';
+    final response = await Dio().put(url);
+    responsePostSum = ResponseData<Post>.fromJson(
+        response.data, (json) => Post.fromJson(json));
+    final Post post = responsePostSum.data!;
+    return post;
+  }
 }
