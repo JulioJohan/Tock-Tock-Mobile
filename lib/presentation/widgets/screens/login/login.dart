@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
 
       if (user != null) {
         // Iniciar sesión con éxito, redirigir a la página principal.
-        Navigator.of(context).pushReplacementNamed('/home');
+        context.go('/home/0');
       }
     } catch (error) {
       print(error);
