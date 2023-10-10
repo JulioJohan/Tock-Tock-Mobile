@@ -7,8 +7,8 @@ class Post {
     String multimedia;
     String share;
     int type;
-    User user;
-    DateTime dateRegistration;
+    User? user;
+    DateTime? dateRegistration;
 
     Post({
         required this.idPost,
@@ -17,8 +17,8 @@ class Post {
         required this.multimedia,
         required this.share,
         required this.type,
-        required this.user,
-        required this.dateRegistration,
+        this.user,
+        this.dateRegistration,
     });
 
     factory Post.fromJson(Map<String, dynamic> json) => Post(
@@ -39,7 +39,7 @@ class Post {
         "multimedia": multimedia,
         "share": share,
         "type": type,
-        "user": user.toJson(),
-        "dateRegistration": dateRegistration.toIso8601String(),
+        "user": user!.toJson(),
+        "dateRegistration": dateRegistration!.toIso8601String(),
     };
 }

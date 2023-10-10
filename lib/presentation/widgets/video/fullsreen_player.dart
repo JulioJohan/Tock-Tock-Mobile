@@ -39,12 +39,12 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
     // VideoPlayerController.networkUrl(url)
     // Cargar nuestro video
     print(widget.videoUrl);
-    controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))    
+    controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
       ..setVolume(20)
       // Siempre quiero que los videos se este reproduciendo
       ..setLooping(true)
       // ..initialize().then((value) => {
-           
+
       //     })
       ..play();
   }
@@ -91,10 +91,10 @@ class _FullScreenPlayerState extends State<FullScreenPlayer> {
             child: Stack(
               children: [
                 // SizedBox(
-                  // width: controller.value.size?.width ?? 0,
-                  // height: controller.value.size?.height ?? 0,
-                  // child:
-                  VideoPlayer(controller),
+                // width: controller.value.size?.width ?? 0,
+                // height: controller.value.size?.height ?? 0,
+                // child:
+                VideoPlayer(controller),
                 // Gradiente
                 VideoBackgroud(
                   stops: const [0.8, 1.0],
