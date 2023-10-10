@@ -399,14 +399,14 @@ class _RegistroPage extends State<RegistroPage>{
                     minWidth: MediaQuery.of(context).size.width,
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.center,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(
+                      const Text(
                         "¿Ya tienes una cuenta?",
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.clip,
@@ -418,16 +418,21 @@ class _RegistroPage extends State<RegistroPage>{
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(4, 0, 0, 0),
-                        child: Text(
-                          "Inicia sesión",
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.clip,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            fontSize: 14,
-                            color: Color(0xff0047ff),
+                          padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                          child: GestureDetector(
+                            onTap: (){
+                                context.go('/login');
+                            },
+                            child: const Text(
+                            "Inicia sesión",
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.clip,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                              fontSize: 14,
+                              color: Color(0xff0047ff),
+                            ),
                           ),
                         ),
                       ),
