@@ -17,7 +17,7 @@ class ResponseData<T> {
     return ResponseData(
     status: json["status"],
     message: json["message"],
-    list: List.from(json["list"]).map((item) => fromJson(item)).toList(),
+    list: json["list"] != null ? List.from(json["list"]).map((item) => fromJson(item)).toList() :null,
     count: json["count"],
     data: json["data"] != null ? fromJson(json["data"]) : null,
     );
