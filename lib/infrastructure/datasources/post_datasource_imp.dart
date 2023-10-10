@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:toktok/config/enviroments/enviroments.dart';
 import 'package:toktok/domain/datasources/post_datasource.dart';
+import 'package:toktok/infrastructure/models/post_dto.response.dart';
 import 'package:toktok/infrastructure/models/post_response.dart';
 import 'package:toktok/infrastructure/models/response.dart';
 
@@ -10,7 +11,7 @@ class PostDataSourceImpl implements PostDataSource {
       ResponseData(status: "", message: "", list: [], count: 0);
 
   @override
-  Future<List<Post>> getAllPost(int page, int size) async {    
+  Future<List<Post>> getAllPost(int page, int size) async {
     String url = '${enviroment.getUrl()}/post/findAllPost';
     print(url);
     final response = await Dio().get(url);
@@ -23,9 +24,20 @@ class PostDataSourceImpl implements PostDataSource {
   }
 
   @override
-  Future<Post> savePost() {
-    // TODO: implement savePost
-    throw UnimplementedError();
+  Future<Post> savePost(PostDto post) async {
+    ResponseData<Post> responsePost =
+        ResponseData(status: "", message: "", count: 0);
+    // TODO: Agregar el formData
+    // final formData = FormData.fromMap({
+    //   'description':post.description,
+    //   'multipartFile':post.multimedia
+    // })
+    String url = '${enviroment.getUrl()}/createPost/1';
+    final response = await Dio().post(url, data: post);
+    responsePost = ResponseData<Post>.fromJson(
+        response.data, (json) => Post.fromJson(json));
+    final Post postRespuesta = responsePost.data!;
+    return postRespuesta;
   }
 
   @override
