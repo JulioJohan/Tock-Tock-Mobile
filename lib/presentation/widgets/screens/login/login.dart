@@ -75,6 +75,10 @@ class _LoginPageState extends State<LoginPage> {
     context.go('/registro');
   }
 
+  Future<void> _resetPassword() async {
+    context.go('/resetPassword');
+  }
+
   void _showAlert(String title, String message) {
     showDialog(
       context: context,
@@ -142,6 +146,10 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Text('Registrarse'),
             ),
+            ElevatedButton(onPressed: (){
+              _resetPassword();
+            }, child: Text('Recuperar Contraseña')
+            )
           ],
         ),
       ),

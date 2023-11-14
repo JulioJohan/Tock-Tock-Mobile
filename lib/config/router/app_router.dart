@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:toktok/presentation/widgets/screens/home/home_screen.dart';
 import 'package:toktok/presentation/widgets/screens/login/login.dart';
 import 'package:toktok/presentation/widgets/screens/registro/registro.dart';
+import 'package:toktok/presentation/widgets/screens/resetPassword/resetPassword.dart';
 
 
 final appRouter = GoRouter(
@@ -40,7 +41,11 @@ final appRouter = GoRouter(
     
     ),
 
-
+     GoRoute(path: '/resetPassword',
+    name: ResetPasswordPage.name,
+    builder: (context, state) => ResetPasswordPage(),
+    
+    ),
 
     GoRoute(
       path: '/',
