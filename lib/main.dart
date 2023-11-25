@@ -23,7 +23,7 @@ void main() async {
         projectId: "tock-tock-f41b9",
         storageBucket: "tock-tock-f41b9.appspot.com",
         messagingSenderId: "882987567219",
-        appId: "1:882987567219:web:b3ac20bfb0fbe996ce4206"),
+        appId: "1:882987567219:web:b3ac20Pbfb0fbe996ce4206"),
     );
   } on FirebaseException catch (e) {
     if (e.code != 'duplicate-app') {
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
     // providers: [
     // .. Operador de casacada, cargara las videos cuando se llame esta clase
     // ChangeNotifierProvider(
-    // Lazy es que se crea muy rapidamente
+    // Lazy es que se crea muy rapidamente  
     // lazy: false,
     // create: (_) => DiscoverProvider(postRepository: postDataSourceImpl)
     // ..loadNextPage()

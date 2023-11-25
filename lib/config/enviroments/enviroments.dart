@@ -2,7 +2,7 @@
 class Enviroment {
   final String url;
 
-  Enviroment({this.url = 'http://192.168.6.19:8081'});
+  Enviroment({this.url = 'https://social-hub-backend.hop.sh'});
 
   String getUrl() {
     return url;

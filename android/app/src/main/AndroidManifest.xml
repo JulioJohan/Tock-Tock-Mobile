@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Agregando permisos para internet -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
+        android:usesCleartextTraffic="true"
         android:label="tocktock"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

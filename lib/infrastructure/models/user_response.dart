@@ -39,7 +39,7 @@ class User {
         motherLastName: json["motherLastName"],
         age: json["age"],
         dateBirth: json["dateBirth"] == null ? null : DateTime.parse(json["dateBirth"]),
-        avatar: json["avatar"],
+        avatar: json["avatar"] == null ? "" : json["avatar"] 
     );
 
     Map<String, dynamic> toJson() => {
