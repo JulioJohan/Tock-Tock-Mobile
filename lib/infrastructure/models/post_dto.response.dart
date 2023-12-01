@@ -1,38 +1,42 @@
+import 'dart:io';
+
 class PostDto {
-  int idPost;
+  // int? idPost;
   String description;
-  int numLike;
-  String multimedia;
-  String share;
+  // int? numLike;
+  File? multimedia;
+  // String? share;
   int user;
-  int type;
+  // int? type;
 
   PostDto(
-      {required this.idPost,
+      {
+        // required this.idPost,
       required this.description,
-      required this.numLike,
-      required this.multimedia,
-      required this.share,
+      // required this.numLike,
+      this.multimedia,
+      // required this.share,
       required this.user,
-      required this.type});
+      // required this.type
+      });
 
   factory PostDto.fromJson(Map<String, dynamic> json) => PostDto(
-        idPost: json["idPost"],
+        // idPost: json["idPost"],
         description: json["description"],
-        numLike: json["numLike"],
+        // numLike: json["numLike"],
         multimedia: json["multimedia"],
-        share: json["share"],
+        // share: json["share"],
         user: json["user"],
-        type: json["type"],
+        // type: json["type"],
       );
 
   Map<String, dynamic> toJson() => {
-        "idPost": idPost,
+        // "idPost": idPost,
         "description": description,
-        "numLike": numLike,
+        // "numLike": numLike,
         "multimedia": multimedia,
-        "share": share,
+        // "share": share,
         "user": user,
-        "type": type,
+        // "type": type,
       };
 }

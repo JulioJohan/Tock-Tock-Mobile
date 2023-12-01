@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:toktok/config/enviroments/enviroments.dart';
 import 'package:toktok/domain/datasources/post_datasource.dart';
@@ -24,16 +26,18 @@ class PostDataSourceImpl implements PostDataSource {
   }
 
   @override
-  Future<Post> savePost(PostDto post) async {
+  Future<Post> savePost(PostDto post, String urlPost) async {
     ResponseData<Post> responsePost =
         ResponseData(status: "", message: "", count: 0);
-    // TODO: Agregar el formData
-    // final formData = FormData.fromMap({
-    //   'description':post.description,
-    //   'multipartFile':post.multimedia
-    // })
-    String url = '${enviroment.getUrl()}/createPost/1';
-    final response = await Dio().post(url, data: post);
+
+    // Crear un MultipartFile
+    final videoFile = await MultipartFile.fromFile(urlPost, filename: 'video.mp4');
+
+    final formData = FormData.fromMap(
+      {'description': post.description, 'multipartFile': videoFile, 'user':2});
+    
+    String url = '${enviroment.getUrl()}/post/createPost/0';
+    final response = await Dio().post(url, data: formData);
     responsePost = ResponseData<Post>.fromJson(
         response.data, (json) => Post.fromJson(json));
     final Post postRespuesta = responsePost.data!;

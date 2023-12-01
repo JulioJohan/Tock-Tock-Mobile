@@ -6,12 +6,13 @@ class CameraGaleryServiceImpl extends CameraGalleryService {
 
   @override
   Future<String?> selectVideo() async {
-   final XFile? cameraVideo = await imagePicker.pickVideo(
+    final XFile? cameraVideo = await imagePicker.pickVideo(
         source: ImageSource.gallery, preferredCameraDevice: CameraDevice.rear);
-    if (cameraVideo == null) return null;    
+    if (cameraVideo == null) return null;
+    // print(cameraVideo.bytes)
     print('Tenemos un video ${cameraVideo.path}');
     return cameraVideo.path;
-  }  
+  }
 
   @override
   Future<String?> takeVideo() async {
