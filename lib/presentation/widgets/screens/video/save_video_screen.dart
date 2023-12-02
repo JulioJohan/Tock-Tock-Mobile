@@ -158,6 +158,8 @@ class _SaveVideoState extends State<SaveVideo> {
                 // Obtener la ruta del video
                 final videoPath = _mediaNotifier.value[0];
 
+                if (videoPath.contains('assets/videos/2.mp4')) return;
+
                 // Llamar a savePost
                 final postRespuesta =
                     await PostDataSourceImpl().savePost(post, videoPath);
