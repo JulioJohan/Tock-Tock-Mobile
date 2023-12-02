@@ -190,6 +190,8 @@ class _SaveVideoState extends State<SaveVideo> {
   }
 }
 
+
+
 class _ImageGallery extends StatefulWidget {
   // final List<String>? media;
   final ValueNotifier<List<String>> mediaNotifier;
@@ -199,6 +201,19 @@ class _ImageGallery extends StatefulWidget {
   _ImageGalleryState createState() => _ImageGalleryState();
 }
 
+class name extends StatefulWidget {
+  const name({super.key});
+
+  @override
+  State<name> createState() => _nameState();
+}
+
+class _nameState extends State<name> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}
 class _ImageGalleryState extends State<_ImageGallery> {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
