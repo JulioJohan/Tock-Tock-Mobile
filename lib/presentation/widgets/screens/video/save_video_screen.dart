@@ -110,7 +110,9 @@ class _SaveVideoState extends State<SaveVideo> {
                 final photoPath = await CameraGaleryServiceImpl().takeVideo();
                 if (photoPath == null) return;
                 print(photoPath);
-                setState(() {});
+                setState(() {
+                  _mediaNotifier.value = [photoPath];
+                });
               },
               style: ButtonStyle(
                   backgroundColor:
