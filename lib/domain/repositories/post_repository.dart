@@ -5,4 +5,7 @@ abstract class PostRepository{
   Future<Post> sumLike(int idPost);
   Future<List<Post>> getAllPost(int page,int size);
   Future<Post> savePost();
+  Future<List<Post>> findByUserPost(String type, String idUser);
+  Future<String> deletePost(int idPost);
+
 }

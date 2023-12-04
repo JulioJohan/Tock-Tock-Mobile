@@ -6,4 +6,6 @@ abstract class PostDataSource {
   Future<Post> sumLike(int idPost);
   Future<List<Post>> getAllPost(int page, int size);
   Future<Post> savePost(PostDto post, String urlVideo);
+  Future<List<Post>> findByUserPost(String idUser, String type);
+  Future<String> deletePost(int idPost);
 }

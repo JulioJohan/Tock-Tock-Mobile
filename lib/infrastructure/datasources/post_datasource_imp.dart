@@ -67,4 +67,29 @@ class PostDataSourceImpl implements PostDataSource {
     final Post post = responsePostSum.data!;
     return post;
   }
+
+    @override
+  Future<List<Post>> findByUserPost(String idUser, String type) async {
+
+    String url = '${enviroment.getUrl()}/post/findByUserPost/${idUser}/${type}';
+    print(url);
+    final response = await Dio().get(url);
+    // print(response.data['list']);
+    responsePost = ResponseData<Post>.fromJson(
+        response.data, (json) => Post.fromJson(json));
+    final List<Post> listPost = responsePost.list!.cast<Post>();
+    print(listPost);
+    return listPost;
+  }
+
+    @override
+  Future<String> deletePost(int idPost) async {
+
+    String url = '${enviroment.getUrl()}/post/deletePost/$idPost';
+    final response = await Dio().delete(url);
+    responsePost = ResponseData<Post>.fromJson(
+        response.data, (json) => Post.fromJson(json));
+    final String mensaje = responsePost.message;
+    return mensaje;
+  }
 }

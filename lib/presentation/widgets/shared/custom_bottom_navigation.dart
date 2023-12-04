@@ -19,6 +19,9 @@ class CustomBottomNavigation extends StatelessWidget {
       case 2:
         context.go('/home/2');
         break;
+      // case 3:
+      //   context.go('/home/3');
+      //   break;
     }
   }
 
@@ -43,9 +46,13 @@ class CustomBottomNavigation extends StatelessWidget {
           label: 'Subir'
         ),
         BottomNavigationBarItem(
-          icon: Icon( Icons.favorite_outline ),
-          label: 'Favoritos'
+          icon: Icon( Icons.video_camera_back ),
+          label: 'Mis videos'
         ),
+        // BottomNavigationBarItem(
+        //   icon: Icon( Icons.video_camera_back ),
+        //   label: 'Mis videos'
+        // ),
       ]
     );
   }

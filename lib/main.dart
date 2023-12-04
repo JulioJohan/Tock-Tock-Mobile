@@ -11,9 +11,13 @@ import 'package:toktok/presentation/widgets/screens/registro/registro.dart';
 // import 'package:toktok/infrastructure/repositories/post_repository_imp.dart';
 // import 'package:toktok/presentation/providers/posts/discover_provider.dart';
 // import 'package:toktok/presentation/screens/discover/discover_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString('id', "2");
 
   try {
     await Firebase.initializeApp(

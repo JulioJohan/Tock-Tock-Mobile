@@ -27,4 +27,14 @@ class PostsRepositoryImpl implements PostRepository {
   Future<Post> subtractLike(int idPost) {
     return postDataSource.subtractLike(idPost);
   }
+
+    @override
+  Future<List<Post>> findByUserPost(String type, String idUser) {
+    return postDataSource.findByUserPost(type, idUser);
+  }
+
+    @override
+  Future<String> deletePost(int idPost) {
+    return postDataSource.deletePost(idPost);
+  }
 }
