@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:toktok/infrastructure/datasources/post_datasource_imp.dart';
 import 'package:toktok/infrastructure/models/post_response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,6 +17,10 @@ class EditPublicacion extends StatefulWidget {
 class _SaveVideoState extends State<EditPublicacion> {
   late Future<List<Post>> _loadVideosFuture;
    bool cargando = false;
+   //Variable para controlar el texto editado.
+   TextEditingController _editingController = TextEditingController();
+
+
   @override
   void initState() {
     super.initState();
@@ -270,6 +275,8 @@ ListView(
               if (value == 1) {
                 print('Editar'+ video.idPost.toString());
                 // Aquí puedes definir la acción que se realizará al seleccionar 'Editar'
+                  _editingController.text = video.description;
+                  _showEditDialog(video);
               } else if (value == 2) {
                 print('Eliminar'+ video.idPost.toString());
                 eliminarVideo(video.idPost);
@@ -313,6 +320,8 @@ ListView(
     setState(() {
       cargando = false;
     });
+    _showAlertDialog("OK", mensaje);
+
   } catch (e) {
     // Manejar errores, si es necesario
     print('Error al eliminar el video: $e');
@@ -322,6 +331,81 @@ ListView(
     });
   }
 }
+
+void _showAlertDialog(String titulo, String mensaje) {
+    showDialog(
+      context: context,
+      builder: (buildcontext) {
+        return AlertDialog(
+          title: Text(titulo),
+          content: Text(mensaje),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text("CERRAR", style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      }
+    );
+  }
+
+//Metodo para crear mostrar un dialogo de editar el video
+void _showEditDialog(Post post) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Editar Video'),
+        content: TextField(
+          controller: _editingController,
+          maxLength: 50, // Define el número máximo de caracteres permitidos
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+          decoration: const InputDecoration(hintText: 'Nueva descripción'),
+        ),
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Cancelar'),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              _updateVideoDescription(post);
+              Navigator.pop(context);
+            },
+            child: const Text('Guardar'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+void _updateVideoDescription(Post post) async {
+  try {
+    // Lógica para enviar la nueva descripción al servidor (puedes usar postRepository.updateDescription, por ejemplo)
+    print(_editingController.text);
+    post.description=_editingController.text;
+        // Realiza la lógica de eliminación aquí, como una petición HTTP DELETE
+    final String mensaje = await postRepository.updatePost(0, post);
+    // Volver a cargar la lista de videos después de la actualización
+    await loadNextPage();
+
+    // Forzar la reconstrucción del widget
+    setState(() {});
+    _showAlertDialog("OK", mensaje);
+
+  } catch (e) {
+    print('Error al actualizar la descripción: $e');
+        _showAlertDialog("Error", "Error al actualizar la descripción");
+
+  }
+}
+
 
 
 }

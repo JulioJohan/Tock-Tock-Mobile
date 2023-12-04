@@ -8,4 +8,5 @@ abstract class PostDataSource {
   Future<Post> savePost(PostDto post, String urlVideo);
   Future<List<Post>> findByUserPost(String idUser, String type);
   Future<String> deletePost(int idPost);
+  Future<String> updatePost(int tipo, Post post);
 }

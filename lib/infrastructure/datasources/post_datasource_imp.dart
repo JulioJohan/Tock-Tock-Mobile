@@ -92,4 +92,18 @@ class PostDataSourceImpl implements PostDataSource {
     final String mensaje = responsePost.message;
     return mensaje;
   }
+
+    @override
+  Future<String> updatePost(int tipo, Post post) async {
+        String url = '${enviroment.getUrl()}/post/updatePost/$tipo';
+
+    final formData = FormData.fromMap(
+      {'idPost':post.idPost,'description': post.description });
+
+    final response = await Dio().put(url, data: formData);
+    responsePost = ResponseData<Post>.fromJson(
+        response.data, (json) => Post.fromJson(json));
+    final String mensaje = responsePost.message;
+    return mensaje;
+  }
 }
