@@ -4,7 +4,7 @@ import 'package:toktok/presentation/widgets/screens/login/login.dart';
 import 'package:toktok/presentation/widgets/screens/registro/registro.dart';
 import 'package:toktok/presentation/widgets/screens/resetPassword/resetPassword.dart';
 
-final appRouter = GoRouter(initialLocation: '/home/0', routes: [
+final appRouter = GoRouter(initialLocation: '/login', routes: [
   GoRoute(
     path: '/home/:page',
     name: HomeScreen.name,

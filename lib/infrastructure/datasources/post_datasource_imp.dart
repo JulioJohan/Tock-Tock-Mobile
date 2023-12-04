@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toktok/config/enviroments/enviroments.dart';
 import 'package:toktok/domain/datasources/post_datasource.dart';
 import 'package:toktok/infrastructure/models/post_dto.response.dart';
@@ -27,6 +28,11 @@ class PostDataSourceImpl implements PostDataSource {
 
   @override
   Future<Post> savePost(PostDto post, String urlPost) async {
+
+    //Id usuario de la sesion.
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? id = prefs.getString('id');
+
     ResponseData<Post> responsePost =
         ResponseData(status: "", message: "", count: 0);
 
@@ -34,7 +40,7 @@ class PostDataSourceImpl implements PostDataSource {
     final videoFile = await MultipartFile.fromFile(urlPost, filename: 'video.mp4');
 
     final formData = FormData.fromMap(
-      {'description': post.description, 'multipartFile': videoFile, 'user':2});
+      {'description': post.description, 'multipartFile': videoFile, 'user':id});
     
     String url = '${enviroment.getUrl()}/post/createPost/0';
     final response = await Dio().post(url, data: formData);

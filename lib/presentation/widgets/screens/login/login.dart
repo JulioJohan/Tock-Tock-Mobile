@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toktok/infrastructure/datasources/user_datasource_imp.dart';
 
 class LoginPage extends StatefulWidget {
   static const String name = 'login';
@@ -13,6 +15,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final UserDataSourceImpl userRepository = UserDataSourceImpl();
+
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -36,6 +40,17 @@ class _LoginPageState extends State<LoginPage> {
       final User? user = authResult.user;
 
       if (user != null) {
+        try{
+              final newVideos = await userRepository.getUserByEmail(email);
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.setString('id', newVideos!.idUser.toString());
+              await prefs.setString('nombre', newVideos.name);
+
+              context.go('/home/0');
+        }catch(error){
+          _showAlert('Error de inicio de sesión',
+          'El correo o la contraseña son incorrectos.');
+        }
         // Iniciar sesión con éxito, redirigir a la página principal.
         context.go('/home/0');
       }

@@ -4,20 +4,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:provider/provider.dart';
 import 'package:toktok/config/router/app_router.dart';
 import 'package:toktok/config/theme/app_theme.dart';
-import 'package:toktok/presentation/screens/discover/discover_screen.dart';
-import 'package:toktok/presentation/widgets/screens/login/login.dart';
-import 'package:toktok/presentation/widgets/screens/registro/registro.dart';
 // import 'package:toktok/infrastructure/datasources/post_datasource_imp.dart';
 // import 'package:toktok/infrastructure/repositories/post_repository_imp.dart';
 // import 'package:toktok/presentation/providers/posts/discover_provider.dart';
 // import 'package:toktok/presentation/screens/discover/discover_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('id', "2");
+
 
   try {
     await Firebase.initializeApp(

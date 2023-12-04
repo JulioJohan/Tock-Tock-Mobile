@@ -18,7 +18,7 @@ class _SaveVideoState extends State<EditPublicacion> {
   late Future<List<Post>> _loadVideosFuture;
    bool cargando = false;
    //Variable para controlar el texto editado.
-   TextEditingController _editingController = TextEditingController();
+   final TextEditingController _editingController = TextEditingController();
 
 
   @override
@@ -31,16 +31,24 @@ class _SaveVideoState extends State<EditPublicacion> {
   final PostDataSourceImpl postRepository = PostDataSourceImpl();
 
   List<Post> videos = [];
+  String? nombre ="";
 
   Future<List<Post>> loadNextPage() async {
     videos=[];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? id = prefs.getString('id');
     print(id);
+    nombre = prefs.getString('nombre');
     final newVideos = await postRepository.findByUserPost(id!, "1");
     videos.addAll(newVideos);
+
+    //Forzar la recontruccion del widget
+    setState(() {});
+
     return videos;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,16 +87,16 @@ class _SaveVideoState extends State<EditPublicacion> {
                   shape: BoxShape.circle,
                 ),
                 child: Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMBF7GiWBnuwHZEoUkGAktUZR91Ge2bVJ9rhYg7-YRz0M7tdM-8Os4tSZno4Jd6j5p9p8&usqp=CAU",
+                    "https://icon-library.com/images/icon-user/icon-user-15.jpg",
                     fit: BoxFit.cover),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 16, horizontal: 0),
+               Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 0),
                 child: Text(
-                  "Robert Fox",
+                  nombre!,
                   textAlign: TextAlign.start,
                   overflow: TextOverflow.clip,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontStyle: FontStyle.normal,
                     fontSize: 16,
@@ -163,7 +171,7 @@ ListView(
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         if (snapshot.hasError) {
-                          return Text('Error cargando videos');
+                          return const Text('Error cargando videos');
                         } else {
                           // Datos cargados correctamente, llama a cargarVideos
                           return ListView(

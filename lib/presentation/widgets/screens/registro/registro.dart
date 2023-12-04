@@ -1,7 +1,6 @@
 // import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 // class RegistroPage extends StatefulWidget {
 //   static const String name = '/';
@@ -134,6 +133,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 ///File download from FlutterViz- Drag and drop a tools. For more details visit https://flutterviz.io/
 
 import 'package:flutter/material.dart';
+import 'package:toktok/infrastructure/datasources/user_datasource_imp.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 
@@ -150,7 +151,9 @@ class RegistroPage extends StatefulWidget {
 class _RegistroPage extends State<RegistroPage>{
 
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+    final UserDataSourceImpl userRepository = UserDataSourceImpl();
+
 
     final TextEditingController _userNameController = TextEditingController();
     final TextEditingController _emailController = TextEditingController();
@@ -160,8 +163,9 @@ class _RegistroPage extends State<RegistroPage>{
     try {
       final String email = _emailController.text.trim();
       final String password = _passwordController.text.trim();
+      final String nombre = _userNameController.text.trim();
 
-      if (email.isEmpty || password.isEmpty) {
+      if (email.isEmpty || password.isEmpty || nombre.isEmpty) {
         _showAlert(
             'Campos requeridos', 'Por favor, completa todos los campos.');
         return;
@@ -178,7 +182,17 @@ class _RegistroPage extends State<RegistroPage>{
       if (user != null) {
         // Iniciar sesión con éxito, redirigir a la página principal.
         // ignore: use_build_context_synchronously
-        context.go('/home/0');
+        try{
+              final newVideos = await userRepository.saveUser(nombre, email);
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              await prefs.setString('id', newVideos!.idUser.toString());
+              await prefs.setString('nombre', newVideos.name);
+
+              context.go('/home/0');
+        }catch(error){
+          _showAlert('Error de inicio de sesión',
+          'El correo o la contraseña son incorrectos.');
+        }
       }
     } catch (error) {
       print(error);
