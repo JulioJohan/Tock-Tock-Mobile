@@ -399,7 +399,7 @@ void _updateVideoDescription(Post post) async {
     print(_editingController.text);
     post.description=_editingController.text;
         // Realiza la lógica de eliminación aquí, como una petición HTTP DELETE
-    final String mensaje = await postRepository.updatePost(0, post);
+    final String mensaje = await postRepository.updatePost(1, post);
     // Volver a cargar la lista de videos después de la actualización
     await loadNextPage();
 
